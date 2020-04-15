@@ -17,7 +17,7 @@ typedef X509*  Crypt__OpenSSL__X509;
 
 static int verify_cb(int ok, X509_STORE_CTX *ctx) {
   if (!ok)
-    switch (ctx->error) {
+    switch (X509_STORE_CTX_get_error (ctx)) {
     case X509_V_ERR_CERT_HAS_EXPIRED:
  /* case X509_V_ERR_DEPTH_ZERO_SELF_SIGNED_CERT: */
     case X509_V_ERR_INVALID_CA:
@@ -37,12 +37,19 @@ static const char *ssl_error(void) {
 }
 
 static const char *ctx_error(X509_STORE_CTX *ctx) {
-  return X509_verify_cert_error_string(ctx->error);
+  return X509_verify_cert_error_string(X509_STORE_CTX_get_error (ctx));
 }
 
 MODULE = Crypt::OpenSSL::VerifyX509    PACKAGE = Crypt::OpenSSL::VerifyX509
 
 PROTOTYPES: DISABLE
+
+#if OPENSSL_API_COMPAT >= 0x10100000L
+#undef ERR_load_crypto_strings
+#define ERR_load_crypto_strings() /* nothing */
+#undef OpenSSL_add_all_algorithms
+# define OpenSSL_add_all_algorithms() /* nothing */
+#endif
 
 BOOT:
   ERR_load_crypto_strings();
@@ -134,6 +141,15 @@ DESTROY(store)
 
   if (store) X509_STORE_free(store); store = 0;
 
+
+#if OPENSSL_API_COMPAT >= 0x10100000L
+void
+__X509_cleanup(void)
+  PPCODE:
+
+  /* deinitialisation is done automatically */
+
+#else
 void
 __X509_cleanup(void)
   PPCODE:
@@ -142,3 +158,6 @@ __X509_cleanup(void)
   ERR_free_strings();
   ERR_remove_state(0);
   EVP_cleanup();
+
+#endif
+
