@@ -1,6 +1,7 @@
 use Test::More;
 use Crypt::OpenSSL::VerifyX509;
 use Crypt::OpenSSL::X509;
+use File::Slurp qw(read_file);
 
 my $v = Crypt::OpenSSL::VerifyX509->new('t/cacert.pem');
 ok($v);
@@ -38,6 +39,24 @@ ok($cert);
 my $ret;
 eval {
         $ret = $v->verify($cert);
+};
+ok($@ =~ /^verify: unable to get local issuer certificate/);
+ok(!$ret);
+
+# Test loading CACert from a string
+
+my $catext = read_file('t/cacert.pem');
+like($catext, qr/CBiDELMAkGA1UEBhMCU0UxEDAOBgNV/);
+
+my $ca = Crypt::OpenSSL::X509->new_from_string($catext);
+ok($ca);
+
+my $vx509 = Crypt::OpenSSL::VerifyX509->new_from_x509($ca);
+ok($vx509);
+
+my $ret;
+eval {
+        my $ret = $vx509->verify($cert);
 };
 ok($@ =~ /^verify: unable to get local issuer certificate/);
 ok(!$ret);

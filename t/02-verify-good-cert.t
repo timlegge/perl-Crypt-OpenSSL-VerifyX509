@@ -1,6 +1,7 @@
 use Test::More;
 use Crypt::OpenSSL::VerifyX509;
 use Crypt::OpenSSL::X509;
+use File::Slurp qw(read_file);
 
 my $v = Crypt::OpenSSL::VerifyX509->new('t/cacert.pem');
 ok($v);
@@ -34,6 +35,20 @@ my $cert = Crypt::OpenSSL::X509->new_from_string($text);
 ok($cert);
 
 my $ret = $v->verify($cert);
+ok($ret);
+
+# Test loading CACert from a string
+
+my $catext = read_file('t/cacert.pem');
+like($catext, qr/CBiDELMAkGA1UEBhMCU0UxEDAOBgNV/);
+
+my $ca = Crypt::OpenSSL::X509->new_from_string($catext);
+ok($ca);
+
+my $vx509 = Crypt::OpenSSL::VerifyX509->new_from_x509($ca);
+ok($vx509);
+
+my $ret = $vx509->verify($cert);
 ok($ret);
 
 done_testing;

@@ -57,6 +57,44 @@ BOOT:
   OpenSSL_add_all_algorithms();
 
 Crypt::OpenSSL::VerifyX509
+new_from_x509(class, cafile_str)
+  SV *class
+  Crypt::OpenSSL::X509 cafile_str;
+
+  PREINIT:
+  
+  int i = 0;
+  X509_LOOKUP *lookup = NULL;
+
+  CODE:
+
+  (void) SvPV_nolen(class);
+
+  RETVAL = X509_STORE_new();
+  if (RETVAL == NULL)
+    croak("failure to allocate x509 store: %s", ssl_error());
+
+  X509_STORE_set_verify_cb_func(RETVAL,verify_cb);
+  
+  /* load CA file given */
+  i = X509_STORE_add_cert(RETVAL, cafile_str);
+
+  if (!i) 
+    croak("load CA cert: %s", ssl_error());
+
+  /* default hash_dir lookup */
+  lookup = X509_STORE_add_lookup(RETVAL,X509_LOOKUP_hash_dir());
+  if (lookup == NULL) 
+    croak("failure to add hash_dir lookup to store: %s", ssl_error());
+  
+  X509_LOOKUP_add_dir(lookup,NULL,X509_FILETYPE_DEFAULT);  
+
+  ERR_clear_error();
+
+  OUTPUT:
+  RETVAL
+
+Crypt::OpenSSL::VerifyX509
 new(class, cafile_str)
   SV *class
   SV *cafile_str

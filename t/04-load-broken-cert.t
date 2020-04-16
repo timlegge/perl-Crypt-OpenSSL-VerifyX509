@@ -8,4 +8,10 @@ eval {
 };
 ok(!$v);
 
+my $vx509;
+eval {
+        $vx509 =  Crypt::OpenSSL::VerifyX509->new_from_x509();
+};
+ok(!$vx509);
+
 done_testing;
