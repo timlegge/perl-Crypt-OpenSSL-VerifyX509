@@ -5,7 +5,7 @@ use warnings;
 
 require 5.008_001;
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 use Crypt::OpenSSL::X509;
 
@@ -77,6 +77,10 @@ Arguments:
 =head1 AUTHOR
 
 Chris Andrews <chrisandrews@venda.com>
+
+=head1 MAINTAINER
+
+Timothy Legge <timlegge@gmail.com>
 
 =head1 COPYRIGHT
 
