@@ -62,7 +62,7 @@ new(class, cafile_str)
   SV *cafile_str
 
   PREINIT:
-  
+
   int i = 1;
   X509_LOOKUP *lookup = NULL;
   STRLEN len;
@@ -77,10 +77,10 @@ new(class, cafile_str)
     croak("failure to allocate x509 store: %s", ssl_error());
 
   X509_STORE_set_verify_cb_func(RETVAL,verify_cb);
-  
+
   /* load CA file given */
   lookup = X509_STORE_add_lookup(RETVAL, X509_LOOKUP_file());
-  if (lookup == NULL) 
+  if (lookup == NULL)
     croak("failure to add file lookup to store: %s", ssl_error());
 
   cafile = SvPV(cafile_str, len);
@@ -88,13 +88,13 @@ new(class, cafile_str)
 
   if (!i)
     croak("load CA cert: %s", ssl_error());
-  
+
   /* default hash_dir lookup */
   lookup = X509_STORE_add_lookup(RETVAL,X509_LOOKUP_hash_dir());
-  if (lookup == NULL) 
+  if (lookup == NULL)
     croak("failure to add hash_dir lookup to store: %s", ssl_error());
-  
-  X509_LOOKUP_add_dir(lookup,NULL,X509_FILETYPE_DEFAULT);  
+
+  X509_LOOKUP_add_dir(lookup,NULL,X509_FILETYPE_DEFAULT);
 
   ERR_clear_error();
 
@@ -107,23 +107,23 @@ verify(store, x509)
   Crypt::OpenSSL::X509 x509;
 
   PREINIT:
-  
+
   X509_STORE_CTX *csc;
 
   CODE:
-  
+
   if (x509 == NULL)
     croak("no cert to verify");
 
   csc = X509_STORE_CTX_new();
   if (csc == NULL)
     croak("csc new: %s", ssl_error());
-    
+
   X509_STORE_set_flags(store, 0);
 
   if (!X509_STORE_CTX_init(csc,store,x509,NULL))
     croak("store ctx init: %s", ssl_error());
-    
+
   RETVAL = X509_verify_cert(csc);
   X509_STORE_CTX_free(csc);
 
