@@ -27,7 +27,9 @@ jobs:
       - uses: actions/checkout@v1
       - name: Install Dependencies
         run: |
-          curl -sL https://cpanmin.us/ | perl - -nq --with-develop --installdeps .
+          cpan JONASBN/Crypt-OpenSSL-X509-1.903.tar.gz;
+          cpan Test::NoTabs Test::Pod Test::Pod::Coverage;
+          curl -sL https://cpanmin.us/ | perl - -nq --with-develop --installdeps -v .
       - name: Build Module
         run: |
           apt-get install make gcc libssl-dev;
