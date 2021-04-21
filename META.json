@@ -49,7 +49,7 @@
          "http://dev.perl.org/licenses"
       ],
       "repository" : {
-         "url" : "http://github.com/chrisa/perl-Crypt-OpenSSL-VerifyX509"
+         "url" : "http://github.com/timlegge/perl-Crypt-OpenSSL-VerifyX509"
       }
    },
    "version" : "0.11",

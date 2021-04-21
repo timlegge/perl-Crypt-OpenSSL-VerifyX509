@@ -25,7 +25,7 @@ requires:
 resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Crypt-OpenSSL-VerifyX509
   license: http://dev.perl.org/licenses
-  repository: http://github.com/chrisa/perl-Crypt-OpenSSL-VerifyX509
+  repository: http://github.com/timlegge/perl-Crypt-OpenSSL-VerifyX509
 version: '0.11'
 x_maintainers:
   - 'Timothy Legge <timlegge@gmail.com>'

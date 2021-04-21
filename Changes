@@ -1,0 +1,14 @@
+Revision history for Crypt-OpenSSL-VerifyX509
+
+0.11 - 2021-04-20
+
+  [New Maintainer]
+  - Timothy Legge <timlegge@gmail.com>
+
+  [Updates since 0.10]
+  - Fix for OpenSSL 1.1.0 compilation issues
+  - Minor updates to build
+
+0.10 - 2011-01-18
+
+  Initial Release
