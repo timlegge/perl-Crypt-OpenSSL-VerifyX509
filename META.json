@@ -42,6 +42,12 @@
          }
       }
    },
+   "provides" : {
+      "Crypt::OpenSSL::VerifyX509" : {
+         "file" : "VerifyX509.pm",
+         "version" : "0.12"
+      }
+   },
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {

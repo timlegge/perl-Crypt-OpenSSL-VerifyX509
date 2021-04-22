@@ -21,6 +21,10 @@ no_index:
   directory:
     - inc
     - t
+provides:
+  Crypt::OpenSSL::VerifyX509:
+    file: VerifyX509.pm
+    version: '0.12'
 requires:
   Crypt::OpenSSL::X509: 0
   perl: 5.8.1
