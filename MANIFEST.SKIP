@@ -1,0 +1,13 @@
+MANIFEST.SKIP
+MANIFEST.BAK
+MANIFEST.bak
+Makefile.PL.old
+Makefile.old
+Makefile$
+MYMETA.*
+Crypt-OpenSSL-VerifyX509*
+.github/*
+.git/*
+blib/*
+.gitignore
+dist.ini
