@@ -45,7 +45,7 @@
    "provides" : {
       "Crypt::OpenSSL::VerifyX509" : {
          "file" : "VerifyX509.pm",
-         "version" : "0.12"
+         "version" : "0.13"
       }
    },
    "release_status" : "stable",
@@ -60,7 +60,7 @@
          "url" : "http://github.com/timlegge/perl-Crypt-OpenSSL-VerifyX509"
       }
    },
-   "version" : "0.12",
+   "version" : "0.13",
    "x_maintainers" : [
       "Timothy Legge <timlegge@gmail.com>"
    ],
