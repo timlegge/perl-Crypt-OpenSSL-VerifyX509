@@ -11,3 +11,4 @@ Makefile.old
 VerifyX509.o
 VerifyX509.c
 VerifyX509.bs
+SIGNATURE
