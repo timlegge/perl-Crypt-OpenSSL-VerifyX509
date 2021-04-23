@@ -1,5 +1,17 @@
 Revision history for Crypt-OpenSSL-VerifyX509
 
+0.14 2021-04-23
+
+  First release since 2011, new maintainer
+
+  [Changes since 0.10]
+  - Fix for OpenSSL 1.1.0 compilation issues
+  - Minor fixes to tests, builds and updated certificates
+
+  [Change Log]
+  - TBD     Update version and changes
+  - c51858f Update META files
+
 0.13-TRIAL 2021-04-22
 
   [Changes since 0.10]
@@ -7,7 +19,7 @@ Revision history for Crypt-OpenSSL-VerifyX509
   - Minor fixes to test and updated certificates
 
   [Change Log]
-  - TBD     Update version and changes
+  - af69709 Update version and changes
   - f80888a Add provides to meta
 
 0.12-TRIAL 2021-04-21
