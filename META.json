@@ -25,9 +25,7 @@
             "ExtUtils::MakeMaker" : "6.59",
             "File::Slurp" : "0",
             "Test::Exception" : "0",
-            "Test::More" : "0.88",
-            "Test::Pod" : "0",
-            "Test::NoTabs" : "0"
+            "Test::More" : "0.88"
          }
       },
       "configure" : {
